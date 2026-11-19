@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fiqih Mawaris Kelas XII SMA — Materi & Kalkulator Faraidh</title>
+  <style>
+    :root {
+      --primary: #065f46;
+      --primary-light: #047857;
+      --primary-soft: #ecfdf5;
+      --gold: #d97706;
+      --gold-soft: #fef3c7;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --danger: #dc2626;
+      --danger-soft: #fef2f2;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--primary), #064e3b);
+      color: #fff;
+      padding: 1.75rem 1rem;
+      text-align: center;
+      border-bottom: 4px solid var(--gold);
+    }
+    header h1 { font-size: 1.65rem; margin-bottom: 0.35rem; }
+    header p { font-size: 0.95rem; opacity: 0.92; max-width: 700px; margin: 0 auto; }
+
+    /* Navigation Tabs */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--card);
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* Quick Sub-Nav inside Materi */
+    .sub-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.1rem;
+    }
+    .sub-nav a {
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.38rem 0.75rem;
+      border-radius: 6px;
+      background: var(--card);
+      color: var(--primary);
+      border: 1px solid var(--border);
+    }
+    .sub-nav a:hover {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+    }
+
+    /* Container & Sections */
+    main { max-width: 980px; margin: 1.5rem auto; padding: 0 1rem 3rem; }
+    .section { display: none; animation: fadeIn 0.25s ease; }
+    .section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      scroll-margin-top: 70px;
+    }
+    .card h2 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-bottom: 0.85rem;
+      border-bottom: 2px solid var(--primary-soft);
+      padding-bottom: 0.45rem;
+    }
+    .card h3 { font-size: 1rem; margin: 1rem 0 0.45rem; color: var(--text); }
+    .card p { margin-bottom: 0.65rem; font-size: 0.94rem; }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: var(--gold-soft);
+      color: #92400e;
+    }
+
+    .quote-box {
+      background: var(--primary-soft);
+      border-left: 4px solid var(--primary);
+      padding: 0.9rem 1rem;
+      border-radius: 0 8px 8px 0;
+      margin: 0.75rem 0;
+      font-size: 0.92rem;
+    }
+
+    .warn-box {
+      background: var(--danger-soft);
+      border-left: 4px solid var(--danger);
+      padding: 0.9rem 1rem;
+      border-radius: 0 8px 8px 0;
+      margin: 0.75rem 0;
+      font-size: 0.92rem;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.85rem; }
+
+    .mini-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem;
+      font-size: 0.91rem;
+    }
+    .mini-box strong.title { color: var(--primary); display: block; margin-bottom: 0.3rem; font-size: 0.96rem; }
+    .mini-box.danger strong.title { color: var(--danger); }
+
+    ul.clean-list, ol.clean-list {
+      padding-left: 1.3rem;
+      font-size: 0.93rem;
+    }
+    ul.clean-list li, ol.clean-list li {
+      margin-bottom: 0.45rem;
+    }
+
+    /* Tables */
+    .table-wrap { overflow-x: auto; margin-top: 0.6rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { padding: 0.65rem 0.75rem; border: 1px solid var(--border); text-align: left; }
+    th { background: var(--primary-soft); color: var(--primary); font-weight: 700; }
+    tr:nth-child(even) td { background: #fcfdfd; }
+
+    /* Calculator Inputs */
+    .preset-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+    .preset-btn {
+      background: var(--gold-soft);
+      color: #78350f;
+      border: 1px solid #fcd34d;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .preset-btn:hover { background: #fde68a; }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.3rem; }
+    .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+    .form-group input {
+      padding: 0.55rem 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      width: 100%;
+    }
+    .form-group input:focus { outline: none; border-color: var(--primary); }
+
+    .heir-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    .heir-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.6rem 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .heir-item span { font-size: 0.85rem; font-weight: 500; }
+    .heir-item input {
+      width: 58px;
+      padding: 0.35rem;
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .action-bar { display: flex; gap: 0.75rem; margin-top: 1.25rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--primary-light); }
+    .btn-secondary {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.75rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { background: var(--bg); }
+
+    .alert {
+      padding: 0.85rem 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    .alert-danger { background: var(--danger-soft); color: var(--danger); border: 1px solid #fecaca; }
+    .alert-info { background: var(--primary-soft); color: var(--primary); border: 1px solid #a7f3d0; }
+    .alert-warn { background: var(--gold-soft); color: #92400e; border: 1px solid #fde68a; }
+
+    /* Visual Bar */
+    .bar-chart { margin: 1rem 0; }
+    .bar-row { margin-bottom: 0.6rem; }
+    .bar-label { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.2rem; font-weight: 600; }
+    .bar-track { background: #e2e8f0; height: 14px; border-radius: 999px; overflow: hidden; }
+    .bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--gold)); border-radius: 999px; }
+
+    /* Quiz */
+    .quiz-item { border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 1rem; }
+    .quiz-item:last-child { border-bottom: none; }
+    .quiz-q { font-weight: 600; margin-bottom: 0.5rem; }
+    .quiz-opt {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 0.55rem 0.85rem;
+      margin-bottom: 0.4rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .quiz-opt:hover { border-color: var(--primary); }
+    .quiz-opt.correct { background: #dcfce7; border-color: #16a34a; color: #14532d; font-weight: 600; }
+    .quiz-opt.wrong { background: #fee2e2; border-color: #dc2626; color: #7f1d1d; }
+    .quiz-exp { font-size: 0.85rem; color: var(--muted); margin-top: 0.4rem; display: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Fiqih Mawaris (Ilmu Faraidh)</h1>
+  <p>Media Pembelajaran & Kalkulator Pembagian Harta Waris Islam — PAI Kelas XII SMA/MA</p>
+</header>
+
+<nav>
+  <button class="tab-btn active" onclick="switchTab('materi', this)">1. Materi Fiqih Mawaris</button>
+  <button class="tab-btn" onclick="switchTab('kalkulator', this)">2. Kalkulator Waris</button>
+  <button class="tab-btn" onclick="switchTab('kuis', this)">3. Kuis Latihan (10 Soal)</button>
+</nav>
+
+<main>
+  <!-- ==================== TAB 1: MATERI ==================== -->
+  <section id="materi" class="section active">
+    <div class="sub-nav">
+      <a href="#pengertian">A. Pengertian & Dasar Hukum</a>
+      <a href="#rukun">B. Rukun, Syarat & Urutan Harta</a>
+      <a href="#pembatal">C. Penghalang & Pembatal Waris</a>
+      <a href="#hikmah">D. Hikmah Waris</a>
+      <a href="#bagian">E. Bagian Ahli Waris & Kaidah</a>
+    </div>
+
+    <!-- A. PENGERTIAN & DASAR HUKUM -->
+    <div id="pengertian" class="card">
+      <h2>A. Pengertian & Dasar Hukum Mawaris</h2>
+      <p>
+        Secara bahasa, kata <strong>mawaris</strong> merupakan bentuk jamak dari <em>mirats</em> yang berarti harta peninggalan orang yang telah meninggal dunia. Ilmu ini juga dikenal luas dengan sebutan <strong>Ilmu Faraidh</strong>, yang berasal dari kata <em>fardh</em> (ketentuan/bagian pasti yang telah ditetapkan syariat).
+      </p>
+      <p>
+        Menurut para ulama fikih (seperti Ibnu Abidin dan Muhammad Asy-Syarbini), <strong>Ilmu Mawaris / Ilmu Faraidh</strong> adalah ilmu tentang dasar-dasar fikih dan perhitungan yang dengannya dapat diketahui siapa saja yang berhak menerima harta peninggalan, siapa yang tidak berhak, serta berapa kadar bagian pasti masing-masing ahli waris sesuai ketetapan syariat Islam.
+      </p>
+
+      <h3>Dasar Hukum Kewarisan Islam</h3>
+      <div class="grid-3">
+        <div class="mini-box">
+          <strong class="title">1. Al-Qur'an</strong>
+          Ketentuan pembagian waris dirinci langsung oleh Allah SWT dalam <strong>QS. An-Nisa' ayat 7, 11, 12, dan 176</strong>, serta <strong>QS. Al-Anfal ayat 75</strong> tentang keutamaan hubungan kerabat. Allah menjanjikan surga bagi yang menaatinya (QS. An-Nisa': 13) dan ancaman neraka bagi yang sengaja melanggarnya (QS. An-Nisa': 14).
+        </div>
+        <div class="mini-box">
+          <strong class="title">2. As-Sunnah (Hadis Nabi)</strong>
+          Rasulullah SAW bersabda: <em>"Berikanlah bagian-bagian warisan (faraidh) kepada yang berhak menerimanya, dan sisanya berikanlah kepada kerabat laki-laki yang paling dekat."</em> (HR. Bukhari & Muslim). Beliau juga memerintahkan umatnya mempelajari dan mengajarkan ilmu faraidh agar tidak timbul pertengkaran.
+        </div>
+        <div class="mini-box">
+          <strong class="title">3. Ijma' & Ijtihad Ulama</strong>
+          Kesepakatan para sahabat dan ijtihad para imam mujtahidin menjadi rujukan dalam menyelesaikan persoalan kewarisan yang tidak dirinci secara tekstual dalam nash (seperti kasus <em>'aul</em>, <em>radd</em>, dan <em>gharrawain</em>), yang di Indonesia juga dirumuskan dalam <strong>Kompilasi Hukum Islam (KHI)</strong>.
+        </div>
+      </div>
+    </div>
+
+    <!-- B. RUKUN, SYARAT & URUTAN HARTA -->
+    <div id="rukun" class="card">
+      <h2>B. Rukun, Syarat & Urutan Penyelesaian Harta</h2>
+      <p>Suatu peralihan harta baru sah disebut sebagai pewarisan Islam apabila memenuhi <strong>tiga rukun utama</strong> berikut:</p>
+      <div class="grid-3">
+        <div class="mini-box">
+          <strong class="title">1. Pewaris (Al-Muwarrits)</strong>
+          Orang beragama Islam yang telah meninggal dunia (baik wafat secara nyata maupun ditetapkan wafat secara hukum/hakim) dan meninggalkan harta.
+        </div>
+        <div class="mini-box">
+          <strong class="title">2. Ahli Waris (Al-Warits)</strong>
+          Orang yang masih hidup saat pewaris wafat dan memiliki sebab kewarisan yang sah, yaitu hubungan darah/nasab, ikatan pernikahan yang sah, atau <em>wala'</em> (memerdekakan budak).
+        </div>
+        <div class="mini-box">
+          <strong class="title">3. Harta Warisan (Al-Mauruts)</strong>
+          Harta benda maupun hak kebendaan milik murni pewaris (<em>tirkah</em>) yang siap dibagikan setelah dikurangi kewajiban-kewajiban sebelum pembagian waris.
+        </div>
+      </div>
+
+      <h3>Syarat Sah Kewarisan</h3>
+      <ul class="clean-list">
+        <li><strong>Wafatnya pewaris:</strong> Dipastikan pewaris benar-benar telah meninggal dunia terlebih dahulu.</li>
+        <li><strong>Hidupnya ahli waris:</strong> Ahli waris dipastikan masih hidup pada saat pewaris meninggal dunia (termasuk bayi dalam kandungan yang kemudian lahir dalam keadaan hidup).</li>
+        <li><strong>Jelasnya status hubungan & tidak ada penghalang:</strong> Diketahui secara pasti hubungan kekerabatan atau pernikahannya, serta tidak terdapat hal-hal yang membatalkan hak warisnya.</li>
+      </ul>
+
+      <h3>4 Urutan Kewajiban Sebelum Harta Dibagikan</h3>
+      <ol class="clean-list">
+        <li><strong>Biaya pengurusan jenazah (<em>tajhiz</em>):</strong> Biaya memandikan, mengafani, hingga memakamkan secara wajar dan tidak berlebihan.</li>
+        <li><strong>Pelunasan utang pewaris:</strong> Baik utang kepada sesama manusia maupun utang syar'i (seperti zakat atau nazar yang belum ditunaikan).</li>
+        <li><strong>Pelaksanaan wasiat yang sah:</strong> Maksimal <strong>1/3 (sepertiga)</strong> dari sisa harta setelah utang, dan tidak ditujukan kepada ahli waris (kecuali disetujui seluruh ahli waris).</li>
+        <li><strong>Pembagian sisa harta bersih:</strong> Dibagikan kepada seluruh ahli waris yang berhak sesuai ketentuan ilmu faraidh.</li>
+      </ol>
+    </div>
+
+    <!-- C. YANG MEMBATALKAN / PENGHALANG WARIS -->
+    <div id="pembatal" class="card">
+      <h2>C. Hal yang Membatalkan & Menghalangi Waris</h2>
+      <p>
+        Meskipun seseorang termasuk kerabat dekat dan memenuhi rukun waris, haknya untuk menerima warisan <strong>batal atau gugur</strong> apabila terdapat penghalang kewarisan (<em>Mawani' al-Irtsi</em>) atau kondisi pembatal berikut:
+      </p>
+
+      <div class="grid-2">
+        <div class="mini-box danger">
+          <strong class="title">1. Perbedaan Agama (Ikhtilaf ad-Din)</strong>
+          Seorang muslim tidak mewarisi harta non-muslim, dan non-muslim tidak mewarisi harta muslim. Sabda Nabi SAW: <em>"Tidaklah berhak seorang muslim mewarisi orang kafir, dan tidak pula orang kafir mewarisi muslim."</em> (HR. Bukhari & Muslim).
+        </div>
+        <div class="mini-box danger">
+          <strong class="title">2. Pembunuhan (Al-Qatlu)</strong>
+          Ahli waris yang membunuh pewarisnya secara sengaja atau tanpa hak otomatis batal hak warisnya. Kaidah fikih menegaskan: <em>"Barang siapa menyegerakan sesuatu sebelum waktunya, maka ia dihukum dengan tidak mendapatkannya."</em>
+        </div>
+        <div class="mini-box danger">
+          <strong class="title">3. Perbudakan (Ar-Riqq)</strong>
+          Seseorang yang berstatus hamba sahaya tidak dapat mewarisi maupun mewariskan harta (meskipun pada zaman modern sistem perbudakan secara praktis sudah tidak ada lagi).
+        </div>
+        <div class="mini-box danger">
+          <strong class="title">4. Perbedaan Negara / Wilayah (Ikhtilaf ad-Dar)</strong>
+          Dalam sebagian kajian fikih klasik, perbedaan kedaulatan wilayah antara negara Islam (<em>Dar al-Islam</em>) dan negara yang memerangi Islam (<em>Dar al-Harb</em>) menjadi penghalang saling mewarisi.
+        </div>
+      </div>
+
+      <div class="warn-box">
+        <strong>Kondisi Lain yang Membatalkan Hak / Pembagian Waris:</strong>
+        <ul class="clean-list" style="margin-top: 0.35rem; margin-bottom: 0;">
+          <li><strong>Kematian bersamaan yang tidak diketahui urutannya:</strong> Misalnya ayah dan anak meninggal bersamaan dalam satu kecelakaan dan tidak diketahui siapa yang wafat lebih dulu; keduanya tidak saling mewarisi.</li>
+          <li><strong>Terhalang oleh ahli waris lebih dekat (<em>Hijab Hirman</em>):</strong> Hak waris seseorang gugur karena ada ahli waris yang derajatnya lebih dekat (contoh: kakek gugur karena ada ayah).</li>
+          <li><strong>Bukan termasuk ahli waris yang sah:</strong> Anak angkat, anak tiri, atau mantan pasangan yang telah bercerai (dan habis masa iddahnya) tidak berhak menerima warisan, melainkan hanya dapat diberi melalui jalur hibah atau wasiat (maksimal 1/3).</li>
+          <li><strong>Pembagian yang menyalahi syariat:</strong> Membagi harta waris dengan sengaja mengabaikan aturan Al-Qur'an dan Sunnah (misalnya menghapus hak waris anak perempuan) adalah tindakan zalim yang tidak sah secara syar'i.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- D. HIKMAH WARIS -->
+    <div id="hikmah" class="card">
+      <h2>D. Hikmah Disyariatkannya Hukum Waris Islam</h2>
+      <p>
+        Allah SWT menetapkan aturan pembagian waris secara terperinci langsung di dalam Al-Qur'an karena mengandung hikmah besar bagi kehidupan individu, keluarga, dan masyarakat:
+      </p>
+      <div class="grid-2">
+        <div class="mini-box">
+          <strong class="title">1. Menegakkan Keadilan & Mencegah Kezaliman</strong>
+          Pembagian yang ditentukan langsung oleh Allah SWT menutup celah keserakahan pihak yang kuat atas pihak yang lemah (seperti anak yatim atau perempuan), sehingga terwujud keadilan sejati (<em>al-'adl</em> dan <em>al-qisth</em>).
+        </div>
+        <div class="mini-box">
+          <strong class="title">2. Memuliakan & Melindungi Hak Perempuan</strong>
+          Sebelum Islam datang, masyarakat jahiliah melarang perempuan menerima warisan. Islam mengangkat martabat perempuan dengan menetapkan bagian waris yang pasti dan tidak boleh diganggu gugat oleh siapa pun.
+        </div>
+        <div class="mini-box">
+          <strong class="title">3. Memperkuat Silaturahmi & Tanggung Jawab</strong>
+          Harta didistribusikan secara merata di lingkungan keluarga terdekat sesuai kedekatan dan tanggung jawab nafkah (bagian laki-laki 2 kali lipat perempuan karena laki-laki berkewajiban memberi mahar dan menafkahi keluarga).
+        </div>
+        <div class="mini-box">
+          <strong class="title">4. Mencegah Sengketa & Perpecahan Keluarga</strong>
+          Ketentuan waris bersifat <em>ijbari</em> (berlaku otomatis sejak pewaris wafat) dan jelas hitungannya, sehingga menghindarkan keluarga dari pertikaian, permusuhan, maupun pemutusan tali kekerabatan akibat perebutan harta.
+        </div>
+      </div>
+    </div>
+
+    <!-- E. BAGIAN AHLI WARIS & KAIDAH -->
+    <div id="bagian" class="card">
+      <h2>E. Bagian Pasti (Ashabul Furudh) & Kaidah Faraidh</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Bagian</th>
+              <th>Ahli Waris yang Berhak</th>
+              <th>Syarat Utama</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1/2</strong></td>
+              <td>Suami; Anak Pr (1 org); Cucu Pr (1 org); Sdr Pr Kandung (1 org); Sdr Pr Seayah (1 org)</td>
+              <td>Tidak ada penghalang maupun pendamping yang menjadikannya <em>ashabah</em> (misal suami mendapat 1/2 jika tidak ada anak/cucu).</td>
+            </tr>
+            <tr>
+              <td><strong>1/4</strong></td>
+              <td>Suami; Istri (1 atau lebih dibagi rata)</td>
+              <td>Suami mendapat 1/4 jika <strong>ada</strong> anak/cucu. Istri mendapat 1/4 jika <strong>tidak ada</strong> anak/cucu.</td>
+            </tr>
+            <tr>
+              <td><strong>1/8</strong></td>
+              <td>Istri (1 atau lebih dibagi rata)</td>
+              <td>Pewaris <strong>memiliki</strong> anak atau cucu dari anak laki-laki.</td>
+            </tr>
+            <tr>
+              <td><strong>2/3</strong></td>
+              <td>Anak Pr (&ge;2); Cucu Pr (&ge;2); Sdr Pr Kandung (&ge;2); Sdr Pr Seayah (&ge;2)</td>
+              <td>Berjumlah 2 orang atau lebih dan tidak ada saudara laki-laki yang menjadikannya <em>ashabah</em>.</td>
+            </tr>
+            <tr>
+              <td><strong>1/3</strong></td>
+              <td>Ibu; Saudara Seibu (&ge;2 org dibagi rata 1:1)</td>
+              <td>Ibu mendapat 1/3 jika tidak ada anak/cucu dan tidak ada &ge;2 saudara. Sdr seibu jika pewaris <em>kalalah</em>.</td>
+            </tr>
+            <tr>
+              <td><strong>1/6</strong></td>
+              <td>Ayah; Ibu; Kakek; Nenek; Sdr Seibu (1 org); Cucu Pr (bersama 1 Anak Pr); Sdr Pr Seayah (bersama 1 Sdr Pr Kandung)</td>
+              <td>Ayah/Kakek mendapat 1/6 jika ada keturunan. Ibu mendapat 1/6 jika ada keturunan atau &ge;2 saudara.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid-2" style="margin-top: 1rem;">
+        <div class="mini-box">
+          <strong class="title">Ashabah & Hijab</strong>
+          <strong>Ashabah</strong> adalah ahli waris penerima sisa setelah <em>ashabul furudh</em> (anak laki-laki bersama anak perempuan berbagi sisa dengan rasio <strong>2 : 1</strong>).<br>
+          <strong>Hijab</strong> terbagi dua: <em>Hijab Hirman</em> (gugur total karena ada kerabat lebih dekat) dan <em>Hijab Nuqshan</em> (berkurang bagiannya, misal suami 1/2 menjadi 1/4 karena ada anak).
+        </div>
+        <div class="mini-box">
+          <strong class="title">'Aul, Radd & Gharrawain</strong>
+          <strong>'Aul</strong>: angka Asal Masalah dinaikkan karena jumlah pembilang melebihi penyebut.<br>
+          <strong>Radd</strong>: sisa harta dikembalikan proporsional kepada <em>ashabul furudh</em> (selain suami/istri) jika tidak ada <em>ashabah</em>.<br>
+          <strong>Gharrawain</strong>: jika ahli waris hanya Suami/Istri + Ibu + Ayah, Ibu mendapat <strong>1/3 dari sisa</strong> setelah bagian pasangan.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 2: KALKULATOR ==================== -->
+  <section id="kalkulator" class="section">
+    <div class="card">
+      <h2>Simulasi Perhitungan Waris (Faraidh)</h2>
+      <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 0.75rem;">
+        Pilih contoh kasus cepat di bawah atau masukkan data harta dan jumlah ahli waris secara mandiri.
+      </p>
+
+      <div class="preset-bar">
+        <button class="preset-btn" onclick="loadPreset('dasar')">Contoh 1: Keluarga Inti (Rp120 Jt)</button>
+        <button class="preset-btn" onclick="loadPreset('gharrawain')">Contoh 2: Gharrawain (Rp60 Jt)</button>
+        <button class="preset-btn" onclick="loadPreset('aul')">Contoh 3: Kasus 'Aul (Rp120 Jt)</button>
+        <button class="preset-btn" onclick="loadPreset('radd')">Contoh 4: Kasus Radd (Rp84 Jt)</button>
+        <button class="preset-btn" onclick="loadPreset('hijab')">Contoh 5: Kasus Hijab (Rp240 Jt)</button>
+      </div>
+
+      <h3>1. Data Harta Peninggalan (Rupiah)</h3>
+      <div class="grid-2">
+        <div class="form-group">
+          <label for="hartaTotal">Total Harta Peninggalan (Rp)</label>
+          <input type="number" id="hartaTotal" min="0" value="120000000" oninput="updateNetHarta()" />
+        </div>
+        <div class="form-group">
+          <label for="biayaJenazah">Biaya Pengurusan Jenazah (Rp)</label>
+          <input type="number" id="biayaJenazah" min="0" value="0" oninput="updateNetHarta()" />
+        </div>
+        <div class="form-group">
+          <label for="utangPewaris">Total Utang Pewaris (Rp)</label>
+          <input type="number" id="utangPewaris" min="0" value="0" oninput="updateNetHarta()" />
+        </div>
+        <div class="form-group">
+          <label for="wasiatPewaris">Wasiat Sah (Maks. 1/3 Sisa Harta) (Rp)</label>
+          <input type="number" id="wasiatPewaris" min="0" value="0" oninput="updateNetHarta()" />
+        </div>
+      </div>
+      <div id="netHartaPreview" class="alert alert-info" style="margin-top: 0.75rem;">
+        Harta Waris Bersih Siap Dibagi: <strong>Rp 120.000.000</strong>
+      </div>
+
+      <h3 style="margin-top: 1.25rem;">2. Jumlah Ahli Waris yang Hidup & Tidak Terkena Penghalang</h3>
+      <div class="heir-grid">
+        <div class="heir-item"><span>Suami (0-1)</span><input type="number" id="suami" min="0" max="1" value="0" /></div>
+        <div class="heir-item"><span>Istri (0-4)</span><input type="number" id="istri" min="0" max="4" value="1" /></div>
+        <div class="heir-item"><span>Ayah (0-1)</span><input type="number" id="ayah" min="0" max="1" value="0" /></div>
+        <div class="heir-item"><span>Ibu (0-1)</span><input type="number" id="ibu" min="0" max="1" value="0" /></div>
+        <div class="heir-item"><span>Kakek (0-1)</span><input type="number" id="kakek" min="0" max="1" value="0" /></div>
+        <div class="heir-item"><span>Nenek (0-2)</span><input type="number" id="nenek" min="0" max="2" value="0" /></div>
+        <div class="heir-item"><span>Anak Laki-laki</span><input type="number" id="anak_lk" min="0" value="1" /></div>
+        <div class="heir-item"><span>Anak Perempuan</span><input type="number" id="anak_pr" min="0" value="1" /></div>
+        <div class="heir-item"><span>Cucu Laki-laki*</span><input type="number" id="cucu_lk" min="0" value="0" /></div>
+        <div class="heir-item"><span>Cucu Perempuan*</span><input type="number" id="cucu_pr" min="0" value="0" /></div>
+        <div class="heir-item"><span>Sdr Lk Kandung</span><input type="number" id="sdr_lk_kandung" min="0" value="0" /></div>
+        <div class="heir-item"><span>Sdr Pr Kandung</span><input type="number" id="sdr_pr_kandung" min="0" value="0" /></div>
+        <div class="heir-item"><span>Sdr Lk Seayah</span><input type="number" id="sdr_lk_seayah" min="0" value="0" /></div>
+        <div class="heir-item"><span>Sdr Pr Seayah</span><input type="number" id="sdr_pr_seayah" min="0" value="0" /></div>
+        <div class="heir-item"><span>Sdr Lk Seibu</span><input type="number" id="sdr_lk_seibu" min="0" value="0" /></div>
+        <div class="heir-item"><span>Sdr Pr Seibu</span><input type="number" id="sdr_pr_seibu" min="0" value="0" /></div>
+      </div>
+      <p style="font-size: 0.78rem; color: var(--muted); margin-top: 0.4rem;">*Cucu laki-laki/perempuan jalur anak laki-laki.</p>
+
+      <div class="action-bar">
+        <button class="btn-primary" onclick="hitungWaris()">Hitung Pembagian Waris</button>
+        <button class="btn-secondary" onclick="resetForm()">Reset</button>
+      </div>
+
+      <div id="calcOutput"></div>
+    </div>
+  </section>
+
+  <!-- ==================== TAB 3: KUIS ==================== -->
+  <section id="kuis" class="section">
+    <div class="card">
+      <h2>Kuis Evaluasi Fiqih Mawaris</h2>
+      <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem;">
+        Klik salah satu pilihan jawaban untuk langsung mengetahui kebenaran dan pembahasannya.
+      </p>
+      <div id="quizContainer"></div>
+      <div id="quizScore" class="alert alert-info" style="display: none;"></div>
+    </div>
+  </section>
+</main>
+
+<script>
+  /* ==================== NAVIGATION ==================== */
+  function switchTab(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  /* ==================== EXACT FRACTION ENGINE ==================== */
+  function gcd(a, b) {
+    a = Math.abs(a); b = Math.abs(b);
+    while (b) { let t = b; b = a % b; a = t; }
+    return a || 1;
+  }
+  function lcm(a, b) {
+    return (a === 0 || b === 0) ? 0 : Math.abs(a * b) / gcd(a, b);
+  }
+  class Frac {
+    constructor(n, d = 1) {
+      if (d < 0) { n = -n; d = -d; }
+      const g = gcd(n, d);
+      this.n = n / g;
+      this.d = d / g;
+    }
+    add(o) { return new Frac(this.n * o.d + o.n * this.d, this.d * o.d); }
+    sub(o) { return new Frac(this.n * o.d - o.n * this.d, this.d * o.d); }
+    mul(o) { return new Frac(this.n * o.n, this.d * o.d); }
+    div(o) { return new Frac(this.n * o.d, this.d * o.n); }
+    eq(o) { return this.n === o.n && this.d === o.d; }
+    gt(o) { return this.n * o.d > o.n * this.d; }
+    gte(o) { return this.n * o.d >= o.n * this.d; }
+    toString() { return this.d === 1 ? `${this.n}` : `${this.n}/${this.d}`; }
+    toFloat() { return this.n / this.d; }
+  }
+
+  function formatRp(num) {
+    return 'Rp ' + Math.round(num).toLocaleString('id-ID');
+  }
+
+  /* ==================== HARTA & PRESETS ==================== */
+  function getNetHarta() {
+    const total = parseFloat(document.getElementById('hartaTotal').value) || 0;
+    const jenazah = parseFloat(document.getElementById('biayaJenazah').value) || 0;
+    const utang = parseFloat(document.getElementById('utangPewaris').value) || 0;
+    const wasiat = parseFloat(document.getElementById('wasiatPewaris').value) || 0;
+
+    if (total < 0 || jenazah < 0 || utang < 0 || wasiat < 0) {
+      return { error: 'Nilai harta, biaya jenazah, utang, maupun wasiat tidak boleh negatif.' };
+    }
+    const sisaSetelahUtang = total - jenazah - utang;
+    if (sisaSetelahUtang <= 0) {
+      return { error: 'Harta habis untuk biaya pengurusan jenazah dan pelunasan utang.' };
+    }
+    const maxWasiat = sisaSetelahUtang / 3;
+    if (wasiat > maxWasiat + 1) {
+      return {
+        error: `Nilai wasiat (${formatRp(wasiat)}) melebihi batas maksimal 1/3 dari sisa harta (${formatRp(maxWasiat)}) kecuali atas persetujuan seluruh ahli waris.`
+      };
+    }
+    return { net: sisaSetelahUtang - wasiat, total, jenazah, utang, wasiat };
+  }
+
+  function updateNetHarta() {
+    const res = getNetHarta();
+    const box = document.getElementById('netHartaPreview');
+    if (res.error) {
+      box.className = 'alert alert-danger';
+      box.innerHTML = res.error;
+    } else {
+      box.className = 'alert alert-info';
+      box.innerHTML = `Harta Waris Bersih Siap Dibagi: <strong>${formatRp(res.net)}</strong>`;
+    }
+  }
+
+  const HEIR_KEYS = [
+    'suami', 'istri', 'ayah', 'ibu', 'kakek', 'nenek',
+    'anak_lk', 'anak_pr', 'cucu_lk', 'cucu_pr',
+    'sdr_lk_kandung', 'sdr_pr_kandung', 'sdr_lk_seayah', 'sdr_pr_seayah',
+    'sdr_lk_seibu', 'sdr_pr_seibu'
+  ];
+
+  function resetForm() {
+    document.getElementById('hartaTotal').value = 120000000;
+    document.getElementById('biayaJenazah').value = 0;
+    document.getElementById('utangPewaris').value = 0;
+    document.getElementById('wasiatPewaris').value = 0;
+    HEIR_KEYS.forEach(k => document.getElementById(k).value = 0);
+    document.getElementById('calcOutput').innerHTML = '';
+    updateNetHarta();
+  }
+
+  function loadPreset(type) {
+    resetForm();
+    if (type === 'dasar') {
+      document.getElementById('hartaTotal').value = 120000000;
+      document.getElementById('istri').value = 1;
+      document.getElementById('anak_lk').value = 1;
+      document.getElementById('anak_pr').value = 1;
+    } else if (type === 'gharrawain') {
+      document.getElementById('hartaTotal').value = 60000000;
+      document.getElementById('suami').value = 1;
+      document.getElementById('ibu').value = 1;
+      document.getElementById('ayah').value = 1;
+    } else if (type === 'aul') {
+      document.getElementById('hartaTotal').value = 120000000;
+      document.getElementById('suami').value = 1;
+      document.getElementById('ibu').value = 1;
+      document.getElementById('sdr_pr_kandung').value = 2;
+    } else if (type === 'radd') {
+      document.getElementById('hartaTotal').value = 84000000;
+      document.getElementById('suami').value = 1;
+      document.getElementById('ibu').value = 1;
+      document.getElementById('anak_pr').value = 1;
+    } else if (type === 'hijab') {
+      document.getElementById('hartaTotal').value = 240000000;
+      document.getElementById('istri').value = 1;
+      document.getElementById('ayah').value = 1;
+      document.getElementById('kakek').value = 1;
+      document.getElementById('anak_lk').value = 1;
+      document.getElementById('sdr_lk_kandung').value = 2;
+    }
+    updateNetHarta();
+    hitungWaris();
+  }
+
+  /* ==================== FARAIDH SOLVER ==================== */
+  function hitungWaris() {
+    const out = document.getElementById('calcOutput');
+    const hartaInfo = getNetHarta();
+    if (hartaInfo.error) {
+      out.innerHTML = `<div class="alert alert-danger">${hartaInfo.error}</div>`;
+      return;
+    }
+
+    const raw = {};
+    for (const k of HEIR_KEYS) {
+      const val = parseInt(document.getElementById(k).value, 10) || 0;
+      if (val < 0) {
+        out.innerHTML = `<div class="alert alert-danger">Jumlah ahli waris tidak boleh negatif.</div>`;
+        return;
+      }
+      raw[k] = val;
+    }
+
+    if (raw.suami > 0 && raw.istri > 0) {
+      out.innerHTML = `<div class="alert alert-danger">Data tidak konsisten: Suami dan Istri tidak dapat ada bersamaan sebagai ahli waris dari satu pewaris.</div>`;
+      return;
+    }
+    if (raw.suami > 1 || raw.ayah > 1 || raw.ibu > 1 || raw.kakek > 1 || raw.istri > 4) {
+      out.innerHTML = `<div class="alert alert-danger">Jumlah Suami/Ayah/Ibu/Kakek maksimal 1 orang, dan Istri maksimal 4 orang.</div>`;
+      return;
+    }
+
+    const totalInputHeirs = Object.values(raw).reduce((a, b) => a + b, 0);
+    if (totalInputHeirs === 0) {
+      out.innerHTML = `<div class="alert alert-danger">Masukkan minimal 1 orang ahli waris terlebih dahulu.</div>`;
+      return;
+    }
+
+    const h = { ...raw };
+    const mahjub = [];
+
+    // 1. Proses Hijab Hirman
+    if (h.kakek > 0 && h.ayah > 0) {
+      mahjub.push({ nama: 'Kakek', jml: h.kakek, alasan: 'Terhalang (Hijab Hirman) oleh Ayah' });
+      h.kakek = 0;
+    }
+    if (h.nenek > 0 && h.ibu > 0) {
+      mahjub.push({ nama: 'Nenek', jml: h.nenek, alasan: 'Terhalang (Hijab Hirman) oleh Ibu' });
+      h.nenek = 0;
+    }
+    if (h.cucu_lk > 0 && h.anak_lk > 0) {
+      mahjub.push({ nama: 'Cucu Laki-laki', jml: h.cucu_lk, alasan: 'Terhalang (Hijab Hirman) oleh Anak Laki-laki' });
+      h.cucu_lk = 0;
+    }
+    if (h.cucu_pr > 0) {
+      if (h.anak_lk > 0) {
+        mahjub.push({ nama: 'Cucu Perempuan', jml: h.cucu_pr, alasan: 'Terhalang oleh Anak Laki-laki' });
+        h.cucu_pr = 0;
+      } else if (h.anak_pr >= 2 && h.cucu_lk === 0) {
+        mahjub.push({ nama: 'Cucu Perempuan', jml: h.cucu_pr, alasan: 'Terhalang oleh 2 atau lebih Anak Perempuan (tanpa Cucu Laki-laki)' });
+        h.cucu_pr = 0;
+      }
+    }
+
+    // Saudara Kandung
+    if (h.sdr_lk_kandung > 0 && (h.anak_lk > 0 || h.cucu_lk > 0 || h.ayah > 0)) {
+      mahjub.push({ nama: 'Saudara Laki-laki Kandung', jml: h.sdr_lk_kandung, alasan: 'Terhalang oleh Anak Laki-laki, Cucu Laki-laki, atau Ayah' });
+      h.sdr_lk_kandung = 0;
+    }
+    if (h.sdr_pr_kandung > 0 && (h.anak_lk > 0 || h.cucu_lk > 0 || h.ayah > 0)) {
+      mahjub.push({ nama: 'Saudara Perempuan Kandung', jml: h.sdr_pr_kandung, alasan: 'Terhalang oleh Anak Laki-laki, Cucu Laki-laki, atau Ayah' });
+      h.sdr_pr_kandung = 0;
+    }
+
+    const sdrPrKandungAshabahMaalGhair = (h.sdr_lk_kandung === 0 && h.sdr_pr_kandung > 0 && (h.anak_pr > 0 || h.cucu_pr > 0));
+
+    // Saudara Seayah
+    if (h.sdr_lk_seayah > 0 && (h.anak_lk > 0 || h.cucu_lk > 0 || h.ayah > 0 || h.sdr_lk_kandung > 0 || sdrPrKandungAshabahMaalGhair)) {
+      mahjub.push({ nama: 'Saudara Laki-laki Seayah', jml: h.sdr_lk_seayah, alasan: 'Terhalang oleh keturunan laki-laki, Ayah, Sdr Lk Kandung, atau Sdr Pr Kandung (Ashabah Ma\'al Ghair)' });
+      h.sdr_lk_seayah = 0;
+    }
+    if (h.sdr_pr_seayah > 0) {
+      if (h.anak_lk > 0 || h.cucu_lk > 0 || h.ayah > 0 || h.sdr_lk_kandung > 0 || sdrPrKandungAshabahMaalGhair) {
+        mahjub.push({ nama: 'Saudara Perempuan Seayah', jml: h.sdr_pr_seayah, alasan: 'Terhalang oleh keturunan laki-laki, Ayah, Sdr Lk Kandung, atau Sdr Pr Kandung (Ashabah Ma\'al Ghair)' });
+        h.sdr_pr_seayah = 0;
+      } else if (h.sdr_pr_kandung >= 2 && h.sdr_lk_seayah === 0) {
+        mahjub.push({ nama: 'Saudara Perempuan Seayah', jml: h.sdr_pr_seayah, alasan: 'Terhalang oleh 2 atau lebih Saudara Perempuan Kandung (tanpa Sdr Lk Seayah)' });
+        h.sdr_pr_seayah = 0;
+      }
+    }
+
+    // Saudara Seibu
+    const hasDesc = (h.anak_lk + h.anak_pr + h.cucu_lk + h.cucu_pr) > 0;
+    const hasMaleAsc = (h.ayah + h.kakek) > 0;
+    if (h.sdr_lk_seibu > 0 && (hasDesc || hasMaleAsc)) {
+      mahjub.push({ nama: 'Saudara Laki-laki Seibu', jml: h.sdr_lk_seibu, alasan: 'Terhalang oleh keturunan pewaris (anak/cucu) atau Ayah/Kakek' });
+      h.sdr_lk_seibu = 0;
+    }
+    if (h.sdr_pr_seibu > 0 && (hasDesc || hasMaleAsc)) {
+      mahjub.push({ nama: 'Saudara Perempuan Seibu', jml: h.sdr_pr_seibu, alasan: 'Terhalang oleh keturunan pewaris (anak/cucu) atau Ayah/Kakek' });
+      h.sdr_pr_seibu = 0;
+    }
+
+    // Cek Kasus Kakek bersama Saudara Kandung/Seayah (Jadd wal Ikhwah)
+    const hasSdrKandungSeayah = (h.sdr_lk_kandung + h.sdr_pr_kandung + h.sdr_lk_seayah + h.sdr_pr_seayah) > 0;
+    if (h.kakek > 0 && hasSdrKandungSeayah) {
+      out.innerHTML = `<div class="alert alert-warn">
+        <strong>Catatan Fikih (Kasus Jadd wal Ikhwah):</strong> Kombinasi Kakek bersama Saudara Kandung/Seayah memerlukan perbandingan khusus antara metode <em>Muqasamah</em>, 1/3 sisa, dan 1/6 total harta sehingga disarankan dianalisis bersama guru/ahli faraidh.
+      </div>`;
+      return;
+    }
+
+    const activeKeys = HEIR_KEYS.filter(k => h[k] > 0);
+    let results = [];
+    let status = 'Normal (\'Adilah)';
+    let asalMasalah = 1;
+
+    // 2. Cek Kasus Khusus: Gharrawain (Umariyatain)
+    const isGharrawain = (activeKeys.length === 3 && h.ibu === 1 && h.ayah === 1 && (h.suami === 1 || h.istri > 0));
+    if (isGharrawain) {
+      status = 'Khusus: Gharrawain (Umariyatain)';
+      let fSpouse;
+      if (h.suami === 1) {
+        fSpouse = new Frac(1, 2);
+        results.push({ nama: 'Suami', jml: 1, label: '1/2 (Fardh)', frac: fSpouse, alasan: 'Mendapat 1/2 karena tidak ada keturunan' });
+      } else {
+        fSpouse = new Frac(1, 4);
+        results.push({ nama: 'Istri', jml: h.istri, label: '1/4 (Fardh)', frac: fSpouse, alasan: 'Mendapat 1/4 dibagi rata karena tidak ada keturunan' });
+      }
+      const sisa = new Frac(1, 1).sub(fSpouse);
+      const fIbu = new Frac(1, 3).mul(sisa);
+      const fAyah = sisa.sub(fIbu);
+      asalMasalah = fIbu.d;
+      results.push({ nama: 'Ibu', jml: 1, label: `1/3 Sisa (${fIbu})`, frac: fIbu, alasan: 'Kasus Gharrawain: Ibu mendapat 1/3 dari sisa harta setelah bagian pasangan' });
+      results.push({ nama: 'Ayah', jml: 1, label: `Ashabah (${fAyah})`, frac: fAyah, alasan: 'Kasus Gharrawain: Ayah menerima sisa harta (2x bagian Ibu)' });
+    } else {
+      // 3. Perhitungan Fardh & Ashabah Standar
+      const totalAllSiblings = raw.sdr_lk_kandung + raw.sdr_pr_kandung + raw.sdr_lk_seayah + raw.sdr_pr_seayah + raw.sdr_lk_seibu + raw.sdr_pr_seibu;
+      const hasMaleDesc = (h.anak_lk + h.cucu_lk) > 0;
+      const hasFemaleDesc = (!hasMaleDesc) && ((h.anak_pr + h.cucu_pr) > 0);
+
+      const fardhList = [];
+      const ashabahList = [];
+
+      if (h.suami > 0) {
+        fardhList.push({
+          key: 'suami', nama: 'Suami', jml: h.suami,
+          frac: hasDesc ? new Frac(1, 4) : new Frac(1, 2),
+          alasan: hasDesc ? 'Mendapat 1/4 karena ada keturunan (Hijab Nuqshan)' : 'Mendapat 1/2 karena tidak ada keturunan',
+          isSpouse: true
+        });
+      }
+      if (h.istri > 0) {
+        fardhList.push({
+          key: 'istri', nama: 'Istri', jml: h.istri,
+          frac: hasDesc ? new Frac(1, 8) : new Frac(1, 4),
+          alasan: hasDesc ? 'Mendapat 1/8 dibagi rata karena ada keturunan (Hijab Nuqshan)' : 'Mendapat 1/4 dibagi rata karena tidak ada keturunan',
+          isSpouse: true
+        });
+      }
+      if (h.ibu > 0) {
+        const cond = hasDesc || totalAllSiblings >= 2;
+        fardhList.push({
+          key: 'ibu', nama: 'Ibu', jml: 1,
+          frac: cond ? new Frac(1, 6) : new Frac(1, 3),
+          alasan: cond ? 'Mendapat 1/6 karena pewaris memiliki anak/cucu atau &ge;2 saudara' : 'Mendapat 1/3 karena tidak ada keturunan dan tidak ada &ge;2 saudara',
+          isSpouse: false
+        });
+      }
+      if (h.nenek > 0) {
+        fardhList.push({
+          key: 'nenek', nama: 'Nenek', jml: h.nenek,
+          frac: new Frac(1, 6),
+          alasan: 'Mendapat 1/6 dibagi rata karena tidak ada Ibu',
+          isSpouse: false
+        });
+      }
+
+      let ayahPlusAshabah = false;
+      if (h.ayah > 0) {
+        if (hasMaleDesc) {
+          fardhList.push({ key: 'ayah', nama: 'Ayah', jml: 1, frac: new Frac(1, 6), alasan: 'Mendapat 1/6 karena ada keturunan laki-laki', isSpouse: false });
+        } else if (hasFemaleDesc) {
+          fardhList.push({ key: 'ayah', nama: 'Ayah', jml: 1, frac: new Frac(1, 6), alasan: 'Mendapat 1/6 + sisa (Ashabah) karena hanya ada keturunan perempuan', isSpouse: false });
+          ayahPlusAshabah = true;
+        } else {
+          ashabahList.push({ nama: 'Ayah', jml: 1, weight: 1, alasan: 'Menjadi Ashabah bi Nafsih karena pewaris tidak memiliki keturunan' });
+        }
+      }
+
+      let kakekPlusAshabah = false;
+      if (h.kakek > 0) {
+        if (hasMaleDesc) {
+          fardhList.push({ key: 'kakek', nama: 'Kakek', jml: 1, frac: new Frac(1, 6), alasan: 'Mendapat 1/6 menggantikan Ayah karena ada keturunan laki-laki', isSpouse: false });
+        } else if (hasFemaleDesc) {
+          fardhList.push({ key: 'kakek', nama: 'Kakek', jml: 1, frac: new Frac(1, 6), alasan: 'Mendapat 1/6 + sisa (Ashabah) karena hanya ada keturunan perempuan', isSpouse: false });
+          kakekPlusAshabah = true;
+        } else {
+          ashabahList.push({ nama: 'Kakek', jml: 1, weight: 1, alasan: 'Menjadi Ashabah bi Nafsih menggantikan Ayah' });
+        }
+      }
+
+      // Anak
+      if (h.anak_lk > 0) {
+        if (h.anak_pr > 0) {
+          ashabahList.push({ nama: 'Anak Laki-laki', jml: h.anak_lk, weight: 2, alasan: 'Ashabah bil Ghair bersama Anak Perempuan (rasio 2:1)' });
+          ashabahList.push({ nama: 'Anak Perempuan', jml: h.anak_pr, weight: 1, alasan: 'Ashabah bil Ghair bersama Anak Laki-laki (rasio 2:1)' });
+        } else {
+          ashabahList.push({ nama: 'Anak Laki-laki', jml: h.anak_lk, weight: 1, alasan: 'Ashabah bi Nafsih (mengambil seluruh sisa secara merata)' });
+        }
+      } else if (h.anak_pr > 0) {
+        fardhList.push({
+          key: 'anak_pr', nama: 'Anak Perempuan', jml: h.anak_pr,
+          frac: h.anak_pr === 1 ? new Frac(1, 2) : new Frac(2, 3),
+          alasan: h.anak_pr === 1 ? 'Mendapat 1/2 karena seorang diri dan tidak ada Anak Laki-laki' : 'Mendapat 2/3 dibagi rata karena &ge;2 orang tanpa Anak Laki-laki',
+          isSpouse: false
+        });
+      }
+
+      // Cucu
+      if (h.cucu_lk > 0) {
+        if (h.cucu_pr > 0) {
+          ashabahList.push({ nama: 'Cucu Laki-laki', jml: h.cucu_lk, weight: 2, alasan: 'Ashabah bil Ghair bersama Cucu Perempuan (rasio 2:1)' });
+          ashabahList.push({ nama: 'Cucu Perempuan', jml: h.cucu_pr, weight: 1, alasan: 'Ashabah bil Ghair bersama Cucu Laki-laki (rasio 2:1)' });
+        } else {
+          ashabahList.push({ nama: 'Cucu Laki-laki', jml: h.cucu_lk, weight: 1, alasan: 'Ashabah bi Nafsih menggantikan posisi Anak Laki-laki' });
+        }
+      } else if (h.cucu_pr > 0) {
+        if (h.anak_pr === 0) {
+          fardhList.push({
+            key: 'cucu_pr', nama: 'Cucu Perempuan', jml: h.cucu_pr,
+            frac: h.cucu_pr === 1 ? new Frac(1, 2) : new Frac(2, 3),
+            alasan: h.cucu_pr === 1 ? 'Mendapat 1/2 karena seorang diri' : 'Mendapat 2/3 dibagi rata karena &ge;2 orang',
+            isSpouse: false
+          });
+        } else if (h.anak_pr === 1) {
+          fardhList.push({
+            key: 'cucu_pr', nama: 'Cucu Perempuan', jml: h.cucu_pr,
+            frac: new Frac(1, 6),
+            alasan: 'Mendapat 1/6 sebagai penyempurna 2/3 (Takmilah Tsulutsain) bersama 1 Anak Perempuan',
+            isSpouse: false
+          });
+        }
+      }
+
+      // Saudara Seibu
+      const nSeibu = h.sdr_lk_seibu + h.sdr_pr_seibu;
+      if (nSeibu > 0) {
+        const fSeibu = nSeibu === 1 ? new Frac(1, 6) : new Frac(1, 3);
+        const rSeibu = nSeibu === 1 ? 'Mendapat 1/6 karena seorang diri (pewaris kalalah)' : 'Mendapat 1/3 dibagi sama rata (1:1 laki-laki & perempuan)';
+        if (h.sdr_lk_seibu > 0 && h.sdr_pr_seibu > 0) {
+          fardhList.push({ key: 'sdr_lk_seibu', nama: 'Saudara Laki-laki Seibu', jml: h.sdr_lk_seibu, frac: fSeibu.mul(new Frac(h.sdr_lk_seibu, nSeibu)), alasan: rSeibu, isSpouse: false });
+          fardhList.push({ key: 'sdr_pr_seibu', nama: 'Saudara Perempuan Seibu', jml: h.sdr_pr_seibu, frac: fSeibu.mul(new Frac(h.sdr_pr_seibu, nSeibu)), alasan: rSeibu, isSpouse: false });
+        } else if (h.sdr_lk_seibu > 0) {
+          fardhList.push({ key: 'sdr_lk_seibu', nama: 'Saudara Laki-laki Seibu', jml: h.sdr_lk_seibu, frac: fSeibu, alasan: rSeibu, isSpouse: false });
+        } else {
+          fardhList.push({ key: 'sdr_pr_seibu', nama: 'Saudara Perempuan Seibu', jml: h.sdr_pr_seibu, frac: fSeibu, alasan: rSeibu, isSpouse: false });
+        }
+      }
+
+      // Saudara Kandung
+      if (h.sdr_lk_kandung > 0) {
+        if (h.sdr_pr_kandung > 0) {
+          ashabahList.push({ nama: 'Saudara Laki-laki Kandung', jml: h.sdr_lk_kandung, weight: 2, alasan: 'Ashabah bil Ghair bersama Sdr Pr Kandung (2:1)' });
+          ashabahList.push({ nama: 'Saudara Perempuan Kandung', jml: h.sdr_pr_kandung, weight: 1, alasan: 'Ashabah bil Ghair bersama Sdr Lk Kandung (2:1)' });
+        } else {
+          ashabahList.push({ nama: 'Saudara Laki-laki Kandung', jml: h.sdr_lk_kandung, weight: 1, alasan: 'Ashabah bi Nafsih' });
+        }
+      } else if (h.sdr_pr_kandung > 0) {
+        if (hasFemaleDesc) {
+          ashabahList.push({ nama: 'Saudara Perempuan Kandung', jml: h.sdr_pr_kandung, weight: 1, alasan: 'Ashabah Ma\'al Ghair karena bersama anak/cucu perempuan' });
+        } else {
+          fardhList.push({
+            key: 'sdr_pr_kandung', nama: 'Saudara Perempuan Kandung', jml: h.sdr_pr_kandung,
+            frac: h.sdr_pr_kandung === 1 ? new Frac(1, 2) : new Frac(2, 3),
+            alasan: h.sdr_pr_kandung === 1 ? 'Mendapat 1/2 karena seorang diri (kalalah)' : 'Mendapat 2/3 dibagi rata karena &ge;2 orang (kalalah)',
+            isSpouse: false
+          });
+        }
+      }
+
+      // Saudara Seayah
+      if (h.sdr_lk_seayah > 0) {
+        if (h.sdr_pr_seayah > 0) {
+          ashabahList.push({ nama: 'Saudara Laki-laki Seayah', jml: h.sdr_lk_seayah, weight: 2, alasan: 'Ashabah bil Ghair bersama Sdr Pr Seayah (2:1)' });
+          ashabahList.push({ nama: 'Saudara Perempuan Seayah', jml: h.sdr_pr_seayah, weight: 1, alasan: 'Ashabah bil Ghair bersama Sdr Lk Seayah (2:1)' });
+        } else {
+          ashabahList.push({ nama: 'Saudara Laki-laki Seayah', jml: h.sdr_lk_seayah, weight: 1, alasan: 'Ashabah bi Nafsih' });
+        }
+      } else if (h.sdr_pr_seayah > 0) {
+        if (hasFemaleDesc) {
+          ashabahList.push({ nama: 'Saudara Perempuan Seayah', jml: h.sdr_pr_seayah, weight: 1, alasan: 'Ashabah Ma\'al Ghair karena bersama anak/cucu perempuan' });
+        } else if (h.sdr_pr_kandung === 0) {
+          fardhList.push({
+            key: 'sdr_pr_seayah', nama: 'Saudara Perempuan Seayah', jml: h.sdr_pr_seayah,
+            frac: h.sdr_pr_seayah === 1 ? new Frac(1, 2) : new Frac(2, 3),
+            alasan: h.sdr_pr_seayah === 1 ? 'Mendapat 1/2 karena seorang diri' : 'Mendapat 2/3 dibagi rata karena &ge;2 orang',
+            isSpouse: false
+          });
+        } else if (h.sdr_pr_kandung === 1) {
+          fardhList.push({
+            key: 'sdr_pr_seayah', nama: 'Saudara Perempuan Seayah', jml: h.sdr_pr_seayah,
+            frac: new Frac(1, 6),
+            alasan: 'Mendapat 1/6 sebagai penyempurna 2/3 bersama 1 Saudara Perempuan Kandung',
+            isSpouse: false
+          });
+        }
+      }
+
+      // Hitung Asal Masalah & Total Fardh
+      asalMasalah = fardhList.length > 0
+        ? fardhList.reduce((acc, item) => lcm(acc, item.frac.d), 1)
+        : ashabahList.reduce((acc, item) => acc + item.jml * item.weight, 0);
+
+      const totalFardh = fardhList.reduce((acc, item) => acc.add(item.frac), new Frac(0, 1));
+
+      if (ashabahList.length > 0 || ayahPlusAshabah || kakekPlusAshabah) {
+        const sisa = new Frac(1, 1).sub(totalFardh);
+        if (sisa.gte(new Frac(0, 1))) {
+          for (const item of fardhList) {
+            let finalFrac = item.frac;
+            let lbl = `${item.frac} (Fardh)`;
+            if ((item.key === 'ayah' && ayahPlusAshabah) || (item.key === 'kakek' && kakekPlusAshabah)) {
+              finalFrac = item.frac.add(sisa);
+              lbl = `1/6 + Sisa (${finalFrac})`;
+            }
+            results.push({ nama: item.nama, jml: item.jml, label: lbl, frac: finalFrac, alasan: item.alasan });
+          }
+          if (ashabahList.length > 0) {
+            const totalW = ashabahList.reduce((acc, a) => acc + a.jml * a.weight, 0);
+            for (const a of ashabahList) {
+              const finalFrac = sisa.mul(new Frac(a.jml * a.weight, totalW));
+              results.push({ nama: a.nama, jml: a.jml, label: `Ashabah (${finalFrac})`, frac: finalFrac, alasan: a.alasan });
+            }
+          }
+        } else {
+          // 'Aul saat ada fardh+ashabah
+          const amBaru = totalFardh.mul(new Frac(asalMasalah, 1)).n;
+          status = `Kasus 'Aul (Asal Masalah ${asalMasalah} naik menjadi ${amBaru})`;
+          for (const item of fardhList) {
+            const finalFrac = item.frac.div(totalFardh);
+            results.push({ nama: item.nama, jml: item.jml, label: `${item.frac} &rarr; 'Aul (${finalFrac})`, frac: finalFrac, alasan: item.alasan + ' (penyesuaian \'Aul)' });
+          }
+          for (const a of ashabahList) {
+            results.push({ nama: a.nama, jml: a.jml, label: 'Ashabah (0)', frac: new Frac(0, 1), alasan: 'Sisa harta habis karena \'Aul' });
+          }
+        }
+      } else {
+        // Tanpa Ashabah
+        if (totalFardh.eq(new Frac(1, 1))) {
+          for (const item of fardhList) {
+            results.push({ nama: item.nama, jml: item.jml, label: `${item.frac} (Fardh)`, frac: item.frac, alasan: item.alasan });
+          }
+        } else if (totalFardh.gt(new Frac(1, 1))) {
+          const amBaru = totalFardh.mul(new Frac(asalMasalah, 1)).n;
+          status = `Kasus 'Aul (Asal Masalah ${asalMasalah} naik menjadi ${amBaru})`;
+          for (const item of fardhList) {
+            const finalFrac = item.frac.div(totalFardh);
+            results.push({ nama: item.nama, jml: item.jml, label: `${item.frac} &rarr; 'Aul (${finalFrac})`, frac: finalFrac, alasan: item.alasan + ' (dikurangi proporsional \'Aul)' });
+          }
+        } else {
+          // Kasus Radd
+          status = 'Kasus Radd (Pengembalian Sisa Harta)';
+          const spouses = fardhList.filter(x => x.isSpouse);
+          const nonSpouses = fardhList.filter(x => !x.isSpouse);
+          if (nonSpouses.length === 0) {
+            for (const sp of spouses) {
+              results.push({ nama: sp.nama, jml: sp.jml, label: `${sp.frac} + Radd (1/1)`, frac: new Frac(1, 1), alasan: sp.alasan + ' + mendapat sisa Radd karena tidak ada ahli waris lain (KHI Pasal 193)' });
+            }
+          } else {
+            const spouseSum = spouses.reduce((acc, s) => acc.add(s.frac), new Frac(0, 1));
+            const remForRadd = new Frac(1, 1).sub(spouseSum);
+            const nonSpouseSum = nonSpouses.reduce((acc, ns) => acc.add(ns.frac), new Frac(0, 1));
+            for (const sp of spouses) {
+              results.push({ nama: sp.nama, jml: sp.jml, label: `${sp.frac} (Tetap)`, frac: sp.frac, alasan: sp.alasan + ' (Suami/Istri tidak menerima tambahan Radd)' });
+            }
+            for (const ns of nonSpouses) {
+              const finalFrac = remForRadd.mul(ns.frac.div(nonSpouseSum));
+              results.push({ nama: ns.nama, jml: ns.jml, label: `${ns.frac} + Radd (${finalFrac})`, frac: finalFrac, alasan: ns.alasan + ' + tambahan proporsional Radd' });
+            }
+          }
+        }
+      }
+    }
+
+    // Render Hasil
+    const net = hartaInfo.net;
+    let tableRows = '';
+    let barRows = '';
+    let totalTerbagi = 0;
+
+    results.forEach((r, idx) => {
+      const rpTotal = Math.round(net * r.frac.toFloat());
+      const rpPerOrang = rpTotal / r.jml;
+      const pct = (r.frac.toFloat() * 100).toFixed(2);
+      totalTerbagi += rpTotal;
+
+      tableRows += `
+        <tr>
+          <td>${idx + 1}</td>
+          <td><strong>${r.nama}</strong></td>
+          <td>${r.jml} org</td>
+          <td><span class="badge">${r.label}</span></td>
+          <td><strong>${formatRp(rpTotal)}</strong></td>
+          <td>${formatRp(rpPerOrang)}</td>
+          <td style="font-size: 0.82rem; color: var(--muted);">${r.alasan}</td>
+        </tr>`;
+
+      barRows += `
+        <div class="bar-row">
+          <div class="bar-label">
+            <span>${r.nama} (${r.jml} org) — ${r.frac} (${pct}%)</span>
+            <span>${formatRp(rpTotal)}</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width: ${Math.min(100, pct)}%"></div></div>
+        </div>`;
+    });
+
+    let mahjubHtml = '';
+    if (mahjub.length > 0) {
+      mahjubHtml = `
+        <div class="alert alert-warn">
+          <strong>Ahli Waris yang Terhalang (Mahjub):</strong>
+          <ul style="margin-top: 0.35rem; padding-left: 1.2rem;">
+            ${mahjub.map(m => `<li><strong>${m.nama} (${m.jml} org):</strong> ${m.alasan}</li>`).join('')}
+          </ul>
+        </div>`;
+    }
+
+    const selisihPembulatan = net - totalTerbagi;
+    const notePembulatan = selisihPembulatan !== 0
+      ? `<p style="font-size: 0.8rem; color: var(--muted); margin-top: 0.4rem;">*Terdapat selisih pembulatan pecahan sebesar ${formatRp(Math.abs(selisihPembulatan))} dari total ${formatRp(net)}.</p>`
+      : '';
+
+    out.innerHTML = `
+      <div style="margin-top: 1.5rem; border-top: 2px solid var(--border); padding-top: 1.25rem;">
+        <div class="grid-3" style="margin-bottom: 1rem;">
+          <div class="mini-box"><strong class="title">Status Perhitungan</strong>${status}</div>
+          <div class="mini-box"><strong class="title">Asal Masalah Awal</strong>${asalMasalah}</div>
+          <div class="mini-box"><strong class="title">Harta Waris Bersih</strong>${formatRp(net)}</div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Ahli Waris</th>
+                <th>Jumlah</th>
+                <th>Bagian Faraidh</th>
+                <th>Total Bagian</th>
+                <th>Per Orang</th>
+                <th>Dasar / Alasan</th>
+              </tr>
+            </thead>
+            <tbody>${tableRows}</tbody>
+          </table>
+        </div>
+        ${notePembulatan}
+
+        <h3 style="margin-top: 1.2rem;">Visualisasi Proporsi Pembagian</h3>
+        <div class="bar-chart">${barRows}</div>
+
+        ${mahjubHtml}
+
+        <details style="margin-top: 1rem; background: var(--bg); padding: 0.85rem; border-radius: 8px; border: 1px solid var(--border);">
+          <summary style="cursor: pointer; font-weight: 700; color: var(--primary);">Lihat Ringkasan Langkah Penyelesaian</summary>
+          <ol style="margin-top: 0.6rem; padding-left: 1.3rem; font-size: 0.9rem;">
+            <li><strong>Pemurnian Harta:</strong> Total harta ${formatRp(hartaInfo.total)} dikurangi biaya jenazah (${formatRp(hartaInfo.jenazah)}), utang (${formatRp(hartaInfo.utang)}), dan wasiat (${formatRp(hartaInfo.wasiat)}) = <strong>${formatRp(net)}</strong>.</li>
+            <li><strong>Penyaringan Hijab:</strong> Menentukan ahli waris yang berhak dan menggugurkan ahli waris yang <em>mahjub</em> (${mahjub.length} kelompok terhalang).</li>
+            <li><strong>Penentuan Bagian & Asal Masalah:</strong> Menetapkan bagian pasti (<em>furudh</em>) dengan Asal Masalah awal <strong>${asalMasalah}</strong>, lalu menghitung sisa untuk <em>ashabah</em> atau menyesuaikan dengan <em>'aul/radd</em> jika terjadi.</li>
+            <li><strong>Konversi Rupiah:</strong> Mengalikan pecahan akhir masing-masing ahli waris dengan harta waris bersih ${formatRp(net)}.</li>
+          </ol>
+        </details>
+      </div>`;
+  }
+
+  /* ==================== QUIZ DATA & LOGIC ==================== */
+  const QUIZ_DATA = [
+    {
+      q: "1. Apa pengertian Ilmu Mawaris (Ilmu Faraidh) menurut para ulama fikih?",
+      opts: [
+        "Ilmu tentang tata cara jual beli dan utang piutang dalam Islam",
+        "Ilmu tentang dasar fikih dan perhitungan untuk mengetahui hak serta bagian pasti setiap ahli waris",
+        "Ilmu tentang hibah dan sedekah sebelum seseorang wafat",
+        "Ilmu tentang pembagian harta kekayaan negara"
+      ],
+      ans: 1,
+      exp: "Ilmu Mawaris / Faraidh adalah ilmu tentang dasar-dasar fikih dan perhitungan yang menjelaskan siapa saja yang berhak mewarisi, siapa yang terhalang, serta kadar bagian pasti masing-masing ahli waris."
+    },
+    {
+      q: "2. Surah di dalam Al-Qur'an yang secara khusus merinci bagian pasti para ahli waris (seperti 1/2, 1/4, 1/8, 2/3, 1/3, dan 1/6) adalah...",
+      opts: ["QS. Al-Baqarah ayat 183–185", "QS. An-Nisa' ayat 7, 11, 12, dan 176", "QS. Al-Maidah ayat 1–3", "QS. Al-Kahfi ayat 10–15"],
+      ans: 1,
+      exp: "Ketentuan bagian pasti ahli waris dalam Islam dirinci secara langsung oleh Allah SWT dalam Surah An-Nisa' ayat 7, 11, 12, dan 176."
+    },
+    {
+      q: "3. Manakah yang merupakan tiga rukun kewarisan dalam Islam?",
+      opts: [
+        "Saksi, penghulu, dan surat wasiat",
+        "Pewaris (al-muwarrits), ahli waris (al-warits), dan harta warisan (al-mauruts)",
+        "Utang piutang, zakat mal, dan wakaf",
+        "Akad ijab kabul, wali, dan mahar"
+      ],
+      ans: 1,
+      exp: "Tiga rukun waris adalah adanya pewaris yang wafat (al-muwarrits), ahli waris yang masih hidup (al-warits), dan harta peninggalan bersih (al-mauruts)."
+    },
+    {
+      q: "4. Manakah di antara berikut ini yang termasuk penghalang kewarisan (Mawani' al-Irtsi) sehingga membatalkan hak waris seseorang?",
+      opts: [
+        "Ahli waris tinggal di kota yang berbeda dengan pewaris",
+        "Ahli waris membunuh pewaris atau berbeda agama dengan pewaris",
+        "Ahli waris sudah memiliki pekerjaan yang mapan",
+        "Ahli waris masih berusia di bawah 17 tahun"
+      ],
+      ans: 1,
+      exp: "Penghalang waris (mawani' al-irtsi) meliputi perbedaan agama, pembunuhan terhadap pewaris, dan perbudakan."
+    },
+    {
+      q: "5. Sebelum harta peninggalan pewaris dibagikan kepada ahli waris, kewajiban manakah yang harus didahulukan pertama kali?",
+      opts: ["Melaksanakan wasiat", "Biaya pengurusan jenazah", "Membayar utang piutang", "Membagi kepada anak laki-laki"],
+      ans: 1,
+      exp: "Urutan pertama penyelesaian harta peninggalan adalah biaya pengurusan jenazah secara wajar, disusul pelunasan utang, lalu wasiat maksimal 1/3."
+    },
+    {
+      q: "6. Salah satu hikmah utama disyariatkannya hukum waris Islam secara rinci dalam Al-Qur'an adalah...",
+      opts: [
+        "Menegakkan keadilan, melindungi hak perempuan, dan mencegah perpecahan keluarga",
+        "Mengumpulkan seluruh harta hanya kepada anak laki-laki tertua",
+        "Menghapus kewajiban membayar utang pewaris",
+        "Membebaskan ahli waris dari tanggung jawab keluarga"
+      ],
+      ans: 0,
+      exp: "Hukum waris Islam menegakkan keadilan, memuliakan serta melindungi hak perempuan yang dahulu terabaikan, mempererat silaturahmi, dan mencegah sengketa keluarga."
+    },
+    {
+      q: "7. Seorang istri meninggal dunia dan meninggalkan suami serta 1 orang anak perempuan. Berapa bagian yang diterima suami?",
+      opts: ["1/2", "1/4", "1/8", "1/6"],
+      ans: 1,
+      exp: "Berdasarkan QS. An-Nisa' ayat 12, suami mendapat 1/2 jika tidak ada anak, dan berkurang (Hijab Nuqshan) menjadi 1/4 jika pewaris memiliki anak/cucu."
+    },
+    {
+      q: "8. Pewaris wafat meninggalkan istri, ayah, kakek, dan 1 anak laki-laki. Siapakah ahli waris yang terhalang (mahjub)?",
+      opts: ["Istri", "Ayah", "Kakek", "Anak laki-laki"],
+      ans: 2,
+      exp: "Kakek terhalang (Hijab Hirman) oleh keberadaan Ayah karena posisi Ayah lebih dekat kepada pewaris."
+    },
+    {
+      q: "9. Apa yang dimaksud dengan kasus 'Aul dalam perhitungan waris Islam?",
+      opts: [
+        "Kelebihan sisa harta karena tidak ada ashabah",
+        "Bertambahnya angka Asal Masalah karena jumlah bagian pembilang melebihi penyebut",
+        "Gugurnya ahli waris karena beda agama",
+        "Pembagian 1/3 sisa untuk ibu dalam kasus Gharrawain"
+      ],
+      ans: 1,
+      exp: "'Aul terjadi ketika jumlah bagian pasti (furudh) melebihi 1 (pembilang > penyebut), sehingga Asal Masalah dinaikkan agar seluruh bagian berkurang secara proporsional."
+    },
+    {
+      q: "10. Jika ahli waris terdiri dari Suami, Ibu, dan Ayah saja (Kasus Gharrawain), berapakah bagian yang diterima Ibu?",
+      opts: [
+        "1/3 dari total harta",
+        "1/3 dari sisa harta setelah bagian suami (= 1/6 total)",
+        "1/2 dari total harta",
+        "1/4 dari sisa harta"
+      ],
+      ans: 1,
+      exp: "Dalam kasus Gharrawain, Ibu mendapat 1/3 dari sisa harta (1/3 × 1/2 = 1/6) dan Ayah mendapat sisanya (2/6 = 1/3) agar bagian ayah tetap 2 kali bagian ibu."
+    }
+  ];
+
+  let scoreCount = 0;
+  let answeredCount = 0;
+
+  function renderQuiz() {
+    const container = document.getElementById('quizContainer');
+    container.innerHTML = QUIZ_DATA.map((item, qIdx) => `
+      <div class="quiz-item" id="qbox-${qIdx}">
+        <div class="quiz-q">${item.q}</div>
+        ${item.opts.map((opt, oIdx) => `
+          <button class="quiz-opt" onclick="answerQuiz(${qIdx}, ${oIdx}, this)">${String.fromCharCode(65 + oIdx)}. ${opt}</button>
+        `).join('')}
+        <div class="quiz-exp" id="qexp-${qIdx}"><strong>Pembahasan:</strong> ${item.exp}</div>
+      </div>
+    `).join('');
+  }
+
+  function answerQuiz(qIdx, oIdx, btn) {
+    const box = document.getElementById(`qbox-${qIdx}`);
+    if (box.dataset.done) return;
+    box.dataset.done = "1";
+    answeredCount++;
+
+    const correctIdx = QUIZ_DATA[qIdx].ans;
+    const buttons = box.querySelectorAll('.quiz-opt');
+    buttons[correctIdx].classList.add('correct');
+    if (oIdx !== correctIdx) {
+      btn.classList.add('wrong');
+    } else {
+      scoreCount++;
+    }
+    document.getElementById(`qexp-${qIdx}`).style.display = 'block';
+
+    const scoreBox = document.getElementById('quizScore');
+    scoreBox.style.display = 'block';
+    const nilai = Math.round((scoreCount / QUIZ_DATA.length) * 100);
+    scoreBox.innerHTML = `Progres Kuis: <strong>${answeredCount}/${QUIZ_DATA.length} soal dijawab</strong> | Benar: <strong>${scoreCount}</strong> | Skor Sementara: <strong>${nilai}</strong>`;
+  }
+
+  renderQuiz();
+</script>
+</body>
+</html>
